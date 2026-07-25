@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Traits\BelongsToTenant;
+use App\Models\Traits\Auditable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class StockMovement extends Model
+{
+    use BelongsToTenant, Auditable;
+
+    protected $fillable = [
+        'company_id',
+        'product_id',
+        'warehouse_id',
+        'to_warehouse_id',
+        'created_by',
+        'type',
+        'quantity',
+        'reference',
+        'notes',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'quantity' => 'integer',
+        ];
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function warehouse(): BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
+    public function toWarehouse(): BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class, 'to_warehouse_id');
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+}
