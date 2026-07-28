@@ -1,7 +1,7 @@
 # FatooraBot
 
 <p align="center">
-  <img src="docs/images/logo.png" width="140" alt="FatooraBot Logo">
+  <img src="public/FatooraBot.png" width="140" alt="FatooraBot Logo">
 </p>
 
 <h1 align="center">FatooraBot</h1>
